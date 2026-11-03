@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 고졸 채용 통합 대시보드</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body { font-family: 'Pretendard', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                <div class="bg-indigo-600 p-2.5 rounded-xl shadow-inner">
+                    <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">2026 고졸 채용 Integrated Dashboard</h1>
+                    <p class="text-xs text-slate-400 mt-0.5">공공기관 · 대기업 · 공무원 · 지원정책 총망라 통합 안내 시스템</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs px-3 py-1.5 rounded-full font-medium">
+                    ✨ 2026학년도 최신 정보 반영
+                </span>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-1.5 rounded-lg text-xs font-medium border border-slate-700 transition flex items-center space-x-1.5">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                    <span>화면 인쇄/PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+
+        <!-- KPI Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">공공기관 고졸채용 목표</p>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-2">10% 이상 확대</h3>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-xl text-blue-600"><i data-lucide="building-2" class="w-6 h-6"></i></div>
+                </div>
+                <p class="text-xs text-slate-500 mt-3 flex items-center"><span class="text-emerald-600 font-semibold mr-1">▲ 정부 가이드</span> 주요 공기업 의무 채용 비율</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">국가직 지역인재 9급</p>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-2">약 300+명 선발</h3>
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded-xl text-emerald-600"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+                </div>
+                <p class="text-xs text-slate-500 mt-3 flex items-center"><span class="text-indigo-600 font-semibold mr-1">★ 전문교과</span> 직업계고 추천 선발 전형</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">고교 취업연계 장려금</p>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-2">500만 원 / 1인</h3>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-xl text-amber-600"><i data-lucide="award" class="w-6 h-6"></i></div>
+                </div>
+                <p class="text-xs text-slate-500 mt-3 flex items-center"><span class="text-amber-600 font-semibold mr-1">💰 교육부</span> 중소·중견기업 취업 장려 지원</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">대기업 고졸 공채</p>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-2">생산·기술직 중심</h3>
+                    </div>
+                    <div class="bg-purple-50 p-3 rounded-xl text-purple-600"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
+                </div>
+                <p class="text-xs text-slate-500 mt-3 flex items-center"><span class="text-purple-600 font-semibold mr-1">🏭 상시/수시</span> 삼성·현대차·SK 등 기술직</p>
+            </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Search Input -->
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="기관명, 기업명, 직무 검색..." 
+                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition">
+                </div>
+
+                <!-- Category Filter -->
+                <div>
+                    <select id="categoryFilter" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition">
+                        <option value="all">전체 분야 (공공·대기업·공무원·정책)</option>
+                        <option value="공공기관">공공기관 (공기업·준정부기관)</option>
+                        <option value="대기업">대기업 (생산·기술직 공채)</option>
+                        <option value="공무원">공무원 (국가직/지방직)</option>
+                        <option value="지원정책">정부 지원금 및 정책</option>
+                    </select>
+                </div>
+
+                <!-- Region Filter -->
+                <div>
+                    <select id="regionFilter" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition">
+                        <option value="all">전체 지역</option>
+                        <option value="전국">전국 (수도권 포함)</option>
+                        <option value="수도권">수도권 (서울/인천/경기)</option>
+                        <option value="충청권">충청권 (세종/대전/충남/충북)</option>
+                        <option value="영남권">영남권 (부산/대구/울산/경남/경북)</option>
+                        <option value="호남권">호남권 (광주/전남/전북)</option>
+                    </select>
+                </div>
+
+                <!-- Reset Button -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="resetFilters()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center space-x-1.5">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        <span>필터 초기화</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Charts & Checklist Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Chart Area -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 lg:col-span-1 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center">
+                        <i data-lucide="pie-chart" class="w-5 h-5 mr-2 text-indigo-600"></i>
+                        2026 고졸 채용 비중 분포
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">분야별 채용 시장 점유율 및 비중 현황</p>
+                </div>
+                <div class="relative w-full h-64 flex items-center justify-center">
+                    <canvas id="recruitmentChart"></canvas>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex justify-between">
+                    <span>공공기관: 40%</span>
+                    <span>대기업: 30%</span>
+                    <span>공무원: 20%</span>
+                    <span>기타: 10%</span>
+                </div>
+            </div>
+
+            <!-- Preparation Checklist -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 lg:col-span-2 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 mb-1 flex items-center">
+                        <i data-lucide="check-square" class="w-5 h-5 mr-2 text-indigo-600"></i>
+                        고졸 채용 핵심 대비 체크리스트
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">학생 지도 시 필수적으로 점검해야 할 항목들입니다.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="flex items-start space-x-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100 hover:bg-slate-100/60 cursor-pointer transition">
+                        <input type="checkbox" class="mt-0.5 w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500" checked>
+                        <div>
+                            <span class="text-sm font-semibold text-slate-800 block">NCS 직업기초능력평가</span>
+                            <span class="text-xs text-slate-500">의사소통, 수리, 문제해결능력 대비</span>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100 hover:bg-slate-100/60 cursor-pointer transition">
+                        <input type="checkbox" class="mt-0.5 w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500" checked>
+                        <div>
+                            <span class="text-sm font-semibold text-slate-800 block">한국사 및 공인 자격증</span>
+                            <span class="text-xs text-slate-500">한국사능력검정시험 및 직무별 산업기사</span>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100 hover:bg-slate-100/60 cursor-pointer transition">
+                        <input type="checkbox" class="mt-0.5 w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <div>
+                            <span class="text-sm font-semibold text-slate-800 block">학교생활기록부 직무역량 최적화</span>
+                            <span class="text-xs text-slate-500">전공 교과 이수 및 동아리·프로젝트 실적 정리</span>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100 hover:bg-slate-100/60 cursor-pointer transition">
+                        <input type="checkbox" class="mt-0.5 w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <div>
+                            <span class="text-sm font-semibold text-slate-800 block">블라인드 면접 및 포트폴리오</span>
+                            <span class="text-xs text-slate-500">자기소개서 작성법 및 1분 스피치 리허설</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data List Section -->
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center">
+                    <i data-lucide="list-filter" class="w-5 h-5 mr-2 text-indigo-600"></i>
+                    채용 공고 및 지원 정책 통합 목록 <span id="resultCount" class="ml-2 text-xs font-semibold bg-indigo-100 text-indigo-700 px-2.5 py-0.5 rounded-full"></span>
+                </h3>
+            </div>
+
+            <!-- Cards Grid Container -->
+            <div id="cardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Dynamically rendered by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-400">
+        <p>2026 고졸 채용 통합 대시보드 | 학교 현장 진로 지도 및 취업 역량 강화를 위한 교육용 시스템</p>
+    </footer>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-4 transform transition-all">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span id="modalCategory" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-600"></span>
+                    <h3 id="modalTitle" class="text-xl font-bold text-slate-900 mt-2"></h3>
+                    <p id="modalRegion" class="text-xs text-slate-500 mt-0.5"></p>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="border-t border-slate-100 pt-4 space-y-3">
+                <div>
+                    <span class="text-xs font-semibold text-slate-400 block mb-1">상세 요강 및 지원 내용</span>
+                    <p id="modalDesc" class="text-sm text-slate-700 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100"></p>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <span class="text-xs font-semibold text-slate-400 block">시기 / 일정</span>
+                        <span id="modalPeriod" class="text-sm font-semibold text-slate-800 mt-0.5 block"></span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <span class="text-xs font-semibold text-slate-400 block">핵심 혜택 / 자격</span>
+                        <span id="modalBenefit" class="text-sm font-semibold text-indigo-600 mt-0.5 block"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end pt-2">
+                <button onclick="closeModal()" class="bg-slate-900 hover:bg-slate-800 text-white font-medium px-5 py-2.5 rounded-xl text-sm transition">
+                    확인 완료
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Data Source
+        const recruitmentData = [
+            {
+                id: 1,
+                title: "한국철도공사 (코레일) 고졸 채용",
+                category: "공공기관",
+                region: "전국",
+                period: "상반기 / 하반기 연 2회",
+                benefit: "정규직 사무·운전·토목 직렬",
+                desc: "고등학교 졸업(예정)자 대상 전국 단위 공개 채용. NCS 직업기초능력평가 및 면접을 통해 정규직으로 채용되며 사내 복지 및 승진 우대 혜택 제공."
+            },
+            {
+                id: 2,
+                title: "한국전력공사 고졸 채용형 인턴",
+                category: "공공기관",
+                region: "전국",
+                period: "연중 수시 (주로 5월/9월)",
+                benefit: "채용형 인턴 후 정규직 전환",
+                desc: "전력 설비 운영 및 송배전 기술직 고졸 인재 채용. 인턴십 수료 후 엄격한 평가를 거쳐 정규직(을급)으로 전환되는 대표적 공기업 전형."
+            },
+            {
+                id: 3,
+                title: "삼성전자 고졸(SF·기술직) 공채",
+                category: "대기업",
+                region: "수도권",
+                period: "상반기 (3월 ~ 4월)",
+                benefit: "세계 최고 수준 대우 및 복지",
+                desc: "반도체 제조 설비 운영 및 기술 직무 중심의 고졸 정기 공채. GSAT(직무적성검사) 및 직업역량 면접 전형 실시."
+            },
+            {
+                id: 4,
+                title: "현대자동차 생산직 고졸 공채",
+                category: "대기업",
+                region: "영남권",
+                period: "하반기 집중 채용",
+                benefit: "국내 최고 수준의 정년 보장 및 임금",
+                desc: "울산 및 전주 공장 생산 제조·기술직 채용. 고교 내신, 출결 및 자동차 관련 자격증(기계, 전기, 자동차정비 등) 중시."
+            },
+            {
+                id: 5,
+                title: "국가직 지역인재 9급 수습직원",
+                category: "공무원",
+                region: "전국",
+                period: "매년 4월 원서접수 / 8월 필기",
+                benefit: "일반행정·기술직 국가공무원 임용",
+                desc: "특성화고·마이스터고 및 일반고 전문계 학과 졸업(예정)자 대상 학교장 추천 선발. 필기(국어·영어·한국사) 합격 후 수습 근무 거쳐 정식 9급 임용."
+            },
+            {
+                id: 6,
+                title: "지방직 기술계고 9급 공무원",
+                category: "공무원",
+                region: "충청권",
+                period: "매년 6월 지방직 시험",
+                benefit: "세종시 및 각 지자체 기술직 공무원",
+                desc: "세종특별자치시 및 전국 시·도 교육청 및 지자체에서 주관하는 기술계고 전용 9급 공무원 공채. 건축, 토목, 보건, 일반기계 등 직렬별 선발."
+            },
+            {
+                id: 7,
+                title: "고교 취업연계 장려금 지원사업",
+                category: "지원정책",
+                region: "전국",
+                period: "연중 상시 접수 (교육부/한국장학재단)",
+                benefit: "1인당 500만 원 장려금 지급",
+                desc: "직업계고 및 일반고 직업반 학생들이 중소·중견기업에 취업 시 초기 정착금 및 장려 목적으로 500만 원을 무상 지원하는 정부 정책."
+            },
+            {
+                id: 8,
+                title: "SK하이닉스 제조·기술직 공채",
+                category: "대기업",
+                region: "수도권",
+                period: "상/하반기 수시 채용",
+                benefit: "성과급 및 우수 복리후생",
+                desc: "이천 및 청주 사업장 반도체 양산 기술직 채용. 고등학교 성적, 출결 및 관련 자격증 우대."
+            },
+            {
+                id: 9,
+                title: "국민건강보험공단 고졸 제한경쟁",
+                category: "공공기관",
+                region: "전국",
+                period: "하반기 (9월 ~ 10월)",
+                benefit: "공공 의료·행정 전문가 양성",
+                desc: "건강보험 제도 운영 및 행정 지원 업무를 담당하는 고졸 인재 채용 전형. NCS 기반 서류 및 면접 평가."
+            }
+        ];
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Render Cards
+        function renderCards(data) {
+            const container = document.getElementById('cardContainer');
+            document.getElementById('resultCount').innerText = `${data.length}건`;
+            
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white p-12 rounded-2xl text-center border border-slate-200">
+                        <i data-lucide="folder-search" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
+                        <h4 class="text-base font-semibold text-slate-700">검색 결과가 없습니다</h4>
+                        <p class="text-xs text-slate-400 mt-1">검색어나 필터 조건을 변경해 보세요.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            container.innerHTML = data.map(item => `
+                <div onclick="openModal(${item.id})" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md hover:border-indigo-300 transition cursor-pointer flex flex-col justify-between group">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${getCategoryBadgeClass(item.category)}">${item.category}</span>
+                            <span class="text-xs text-slate-400 flex items-center"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1"></i>${item.region}</span>
+                        </div>
+                        <h4 class="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition">${item.title}</h4>
+                        <p class="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">${item.desc}</p>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
+                        <span class="text-slate-400 flex items-center"><i data-lucide="calendar" class="w-3.5 h-3.5 mr-1"></i>${item.period}</span>
+                        <span class="font-semibold text-indigo-600 flex items-center">상세보기 <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-0.5"></i></span>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function getCategoryBadgeClass(category) {
+            switch(category) {
+                case '공공기관': return 'bg-blue-50 text-blue-700';
+                case '대기업': return 'bg-purple-50 text-purple-700';
+                case '공무원': return 'bg-emerald-50 text-emerald-700';
+                case '지원정책': return 'bg-amber-50 text-amber-700';
+                default: return 'bg-slate-100 text-slate-700';
+            }
+        }
+
+        // Filtering Logic
+        function filterData() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const region = document.getElementById('regionFilter').value;
+
+            const filtered = recruitmentData.filter(item => {
+                const matchKeyword = item.title.toLowerCase().includes(keyword) || item.desc.toLowerCase().includes(keyword);
+                const matchCategory = (category === 'all' || item.category === category);
+                const matchRegion = (region === 'all' || item.region.includes(region) || item.region === '전국');
+                return matchKeyword && matchCategory && matchRegion;
+            });
+
+            renderCards(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = 'all';
+            document.getElementById('regionFilter').value = 'all';
+            renderCards(recruitmentData);
+        }
+
+        // Event Listeners for Filters
+        document.getElementById('searchInput').addEventListener('input', filterData);
+        document.getElementById('categoryFilter').addEventListener('change', filterData);
+        document.getElementById('regionFilter').addEventListener('change', filterData);
+
+        // Modal Controls
+        function openModal(id) {
+            const item = recruitmentData.find(d => d.id === id);
+            if (!item) return;
+
+            document.getElementById('modalCategory').innerText = item.category;
+            document.getElementById('modalTitle').innerText = item.title;
+            document.getElementById('modalRegion').innerText = `근무 지역: ${item.region}`;
+            document.getElementById('modalDesc').innerText = item.desc;
+            document.getElementById('modalPeriod').innerText = item.period;
+            document.getElementById('modalBenefit').innerText = item.benefit;
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('detailModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Initialize Chart.js
+        const ctx = document.getElementById('recruitmentChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['공공기관', '대기업', '공무원', '지원정책'],
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: ['#4f46e5', '#7c3aed', '#059669', '#d97706'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            font: { size: 11, family: 'Pretendard' }
+                        }
+                    }
+                },
+                cutout: '65%'
+            }
+        });
+
+        // Initial Render
+        renderCards(recruitmentData);
+    </script>
+</body>
+</html>
